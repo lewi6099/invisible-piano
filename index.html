@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <title>Invisible Piano</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- P5.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+
+    <!-- Google Hand Tracking CDN -->
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <!-- Hand Tracking Script -->
+    <script type="module" src="./handTrack.js"></script>
+
+    <!-- P5.js and Other Functions Script -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="left-half">
+      <section id="demos" class="invisible">
+        <div id="liveView" class="videoView">
+          <button id="webcamButton" class="mdc-button mdc-button--raised">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">ENABLE WEBCAM</span>
+          </button>
+          <div style="position: relative;">
+            <video id="webcam" style="position: abso" autoplay playsinline></video>
+            <canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="right-half">
+      <div class="instruction-box">
+        <h3>Instructions</h3>
+    
+        <div class="section">
+            <div class="section-title" style="color: #FF0000;">Playing Hand (red)</div>
+            <ul>
+                <li>The first hand to enter the camera's view is the playing hand</li>
+                <li>The keys that are highlighted in yellow are the active notes</li>
+                <li>Touch your thumb to other fingers on your playing hand to play notes</li>
+                <li>Your pointer finger will play the lowest active note, and your pinky will play the highest</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <div class="section-title" style="color: #4275f5;">Control Hand (blue)</div>
+            <ul>
+                <li>The second hand to enter the camera's view is the control hand</li>
+                <li>Touch your thumb to other fingers on your control hand to adjust the controls</li>
+                <li>Pointer finger: Move the active notes higher</li>
+                <li>Middle finger: Move the active notes lower</li>
+                <li>Ring finger: activates sustain mode (notes will continue to play until deactivated)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Other Information</div>
+          <ul>
+              <li>For better results, move hands futher away from the camera</li>
+              <li>Mouse input also works for all features</li>
+              <li>Space bar can be used to activate / deactivate sustain mode</li>
+          </ul>
+      </div>
+      </div>
+
+      <div class="interactive-area">
+        <div class="instruction-box">
+          <div id="sustainBox" class="box" onclick="triggerSustain()">Sustain</div>
+          <div id="moveDownBox" class="box" onclick="updateSectionDown()">Move Down</div>
+          <div id="moveUpBox" class="box" onclick="updateSectionUp()">Move Up</div>
+        </div>
+      </div>
+  </div>
+  </body>
+</html>
